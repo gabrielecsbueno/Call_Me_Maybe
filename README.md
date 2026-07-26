@@ -1,53 +1,4 @@
-*Este proyecto ha sido creado como parte del curriculo de 42 <gabde-so>*
-
----
-
 # **Call Me Maybe**
-
----
-
-# Resumo
-
-Imagina esto: tienes un conjunto de funciones matemáticas y de texto disponibles (sumar números, saludar, invertir una cadena). Un usuario escribe en lenguaje natural: *"¿Cuál es la suma de 2 y 3?"*
-
-Ese programa hará lo siguiente:
-1. Leer esta frase
-2. Preguntar a un pequeño modelo de IA: "¿Qué función debo llamar aquí?"
-3. **Obligar** al modelo a responder en JSON válido
-4. Almacenar la respuesta: `{"name": "fn_add_numbers", "parameters": {"a": 2.0, "b": 3.0}}`
-
-El gran desafío es hacer el modelo siempre devolver un JSON válido, con la estructura exacta que necesitamos.
-Los modelos pequeños no son buenos en generan JSON correcto si los dejas libres. La solución es la **decodificación restringida**, que implementarás desde cero.
-
----
-
-# Estructura del proyecto
-
-```bash
-call_me_maybe/
-├── data/
-│   ├── input/
-│   │   ├── functions_definition.json
-│   │   └── function_calling_tests.json
-│   └── output/              # generado por el programa
-├── src/
-│   ├── __init__.py
-│   ├── __main__.py          # punto de entrada: lee argumentos y llama a main()
-│   ├── models.py            # modelos Pydantic
-│   ├── loader.py            # carga los JSON de entrada
-│   ├── decoder.py           # decodificacion restringida
-│   └── generator.py         # pipeline de generacion
-├── llm_sdk/                 # paquete de la LLM
-│   ├── llm_sdk/
-│   │   └── __init__.py
-│   ├── pyproject.toml
-│   └── uv.lock
-├── pyproject.toml
-├── uv.lock
-├── Makefile
-├── README.md
-└── .gitignore
-```
 
 ---
 
@@ -140,6 +91,36 @@ uv run python -m src --functions_definition <ruta/funciones.json> --input <ruta/
 
 ---
 
+# Estructura del proyecto
+
+```bash
+call_me_maybe/
+├── data/
+│   ├── input/
+│   │   ├── functions_definition.json
+│   │   └── function_calling_tests.json
+│   └── output/              # generado por el programa
+├── src/
+│   ├── __init__.py
+│   ├── __main__.py          # punto de entrada: lee argumentos y llama a main()
+│   ├── models.py            # modelos Pydantic
+│   ├── loader.py            # carga los JSON de entrada
+│   ├── decoder.py           # decodificacion restringida
+│   └── generator.py         # pipeline de generacion
+├── llm_sdk/                 # paquete de la LLM
+│   ├── llm_sdk/
+│   │   └── __init__.py
+│   ├── pyproject.toml
+│   └── uv.lock
+├── pyproject.toml
+├── uv.lock
+├── Makefile
+├── README.md
+└── .gitignore
+```
+
+---
+
 # 2. Instrucciones
 
 ## Requisitos
@@ -183,19 +164,6 @@ uv run python -m src --functions_definition <ruta> --input <ruta> --output <ruta
 - `make clean`: borra `__pycache__`, `.mypy_cache` y `.venv`.
 - `make lint` : corre `flake8` y `mypy`.
 
-
-## Solución de problemas de espacio (sgoinfre)
-
-Si la instalación de paquetes o la descarga del modelo se quedan sin espacio en el home del ordenador de la 42:
-
-```bash
-# cache de uv
-export UV_CACHE_DIR="/sgoinfre/students/gabde-so/.uv_cache"
-
-# cache de Hugging Face (descarga del modelo)
-export HF_HOME="/sgoinfre/students/gabde-so/.hf_cache"
-```
-
 ---
 
 # 3. Recursos
@@ -221,11 +189,3 @@ export HF_HOME="/sgoinfre/students/gabde-so/.hf_cache"
 [Aprendizado Autossupervisionado](https://www.ibm.com/br-pt/think/topics/self-supervised-learning?regionCode=br&languageCode=pt&cm-history=br-pt)
 
 [Documentacao da Qwen3-0.6 da HuggingFace](https://huggingface.co/Qwen/Qwen3-0.6B)
-
-
-## 3.2. Uso de la IA
-
-- Asistencia en estructura del proyecto (carpetas y subcarpetas con la nomenclatura correcta)
-- Asistencia en la estructuración
-- Asistencia con las pruebas
-- Traducción de documentación y este README
